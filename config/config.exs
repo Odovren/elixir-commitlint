@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :commitlint,
   allowed_types: [
@@ -15,5 +15,7 @@ config :commitlint,
     "test"
   ]
 
-
-config :pre_commit, commands: ["test", "credo"]
+if config_env() == :dev do
+  config :pre_commit,
+    commands: ["format --check-formatted", "test", "credo"]
+end
