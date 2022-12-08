@@ -17,4 +17,27 @@ defmodule CommitlintTest do
   test "allows type with scope" do
     assert Commitlint.lint!("feat(scope): add linting to commit messages") == :ok
   end
+
+  test "allows type with scope and exclamation mark" do
+    assert Commitlint.lint!("feat(scope)!: add linting to commit messages") == :ok
+    assert Commitlint.lint!("feat!: add linting to commit messages") == :ok
+  end
+
+  test "allows commit with a body" do
+    assert Commitlint.lint!("""
+    feat: add linting to commit messages
+
+    body
+    """) == :ok
+  end
+
+  test "allows commit with a body and a footer" do
+    assert Commitlint.lint!("""
+    feat: add linting to commit messages
+
+    body
+
+    footer
+    """) == :ok
+  end
 end
