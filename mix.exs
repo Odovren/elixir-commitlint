@@ -22,7 +22,8 @@ defmodule Commitlint.MixProject do
   defp deps do
     [
       {:pre_commit, "~> 0.3.4", only: :dev},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:commit_msg, github: "Odovren/elixir-commit-message", tag: "0.1.0", only: :dev}
     ]
   end
 end
