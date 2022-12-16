@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="pre_commit" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/pre_commit/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/pre_commit/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/pre_commit/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/pre_commit/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/pre_commit/lib" />
+      <root url="file://$PROJECT_DIR$/deps/pre_commit/priv" />
+      <root url="file://$PROJECT_DIR$/deps/pre_commit/lib" />
+      <root url="file://$PROJECT_DIR$/deps/pre_commit/priv" />
+    </SOURCES>
+  </library>
+</component>

@@ -10,7 +10,7 @@ defmodule Commitlint do
   @doc """
   Get the sections of a commit message.
   """
-  @spec get_sections(String.t()) :: %{optional(String.t()) => String.t()}
+  @spec get_sections(String.t()) :: [String.t()]
   defp get_sections(input) do
     String.split(input, "\n\n")
   end
@@ -32,18 +32,23 @@ defmodule Commitlint do
     captured = Regex.named_captures(@type_regex, header)
 
     cond do
-      captured["type"] not in allowed_types -> {:error, "Invalid commit type: #{captured["type"]}"}
-      String.trim(captured["description"]) == "" -> {:error, "Commit message must have a description"}
-      true -> lint_body(rest)
+      captured["type"] not in allowed_types ->
+        {:error, "Invalid commit type: #{captured["type"]}"}
+
+      String.trim(captured["description"]) == "" ->
+        {:error, "Commit message must have a description"}
+
+      true ->
+        lint_body(rest)
     end
   end
-
 
   @doc """
   Make sure the commit message body is valid.
   """
   @spec lint_body([String.t()]) :: lint_result
   defp lint_body([]), do: :ok
+
   defp lint_body([section | rest]) do
     if Enum.empty?(rest) and Regex.match?(@footer_regex, section) do
       lint_footer(section)
@@ -65,6 +70,7 @@ defmodule Commitlint do
   """
   @spec lint_footer_line([String.t()]) :: lint_result
   defp lint_footer_line([]), do: :ok
+
   defp lint_footer_line([line | rest]) do
     if Regex.match?(@footer_regex, line) do
       lint_footer_line(rest)
@@ -72,7 +78,6 @@ defmodule Commitlint do
       {:error, "Invalid footer line: #{line}"}
     end
   end
-
 
   @doc """
   Lint the commit message.

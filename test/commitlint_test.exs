@@ -25,47 +25,47 @@ defmodule CommitlintTest do
 
   test "allows commit with a body only" do
     assert Commitlint.lint!("""
-    feat: add linting to commit messages
+           feat: add linting to commit messages
 
-    body
-    """) == :ok
+           body
+           """) == :ok
   end
 
   test "allows commit with multiple body sections" do
     assert Commitlint.lint!("""
-    feat: add linting to commit messages
+           feat: add linting to commit messages
 
-    body
+           body
 
-    body
-    """) == :ok
+           body
+           """) == :ok
   end
 
   test "allows commit with a footer only" do
     assert Commitlint.lint!("""
-    feat: add linting to commit messages
+           feat: add linting to commit messages
 
-    Acked-by: John Doe
-    """) == :ok
+           Acked-by: John Doe
+           """) == :ok
   end
 
   test "allows commit with multiple footers" do
     assert Commitlint.lint!("""
-    feat: add linting to commit messages
+           feat: add linting to commit messages
 
-    Acked-by: John Doe
-    Signed-off-by: Jane Doe
-    """) == :ok
+           Acked-by: John Doe
+           Signed-off-by: Jane Doe
+           """) == :ok
   end
 
   test "allows commit with a body and a footer" do
     assert Commitlint.lint!("""
-    feat: add linting to commit messages
+           feat: add linting to commit messages
 
-    body
+           body
 
-    Acked-by: John Doe
-    """) == :ok
+           Acked-by: John Doe
+           """) == :ok
   end
 
   test "raises if commit message has no description" do

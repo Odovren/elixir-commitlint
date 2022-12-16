@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="commit_msg" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/commit_msg/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/commit_msg/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/commit_msg/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/commit_msg/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/commit_msg/lib" />
+      <root url="file://$PROJECT_DIR$/deps/commit_msg/priv" />
+      <root url="file://$PROJECT_DIR$/deps/commit_msg/lib" />
+      <root url="file://$PROJECT_DIR$/deps/commit_msg/priv" />
+    </SOURCES>
+  </library>
+</component>

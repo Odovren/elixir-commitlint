@@ -7,7 +7,8 @@ defmodule Commitlint.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      dialyzer: [plt_add_apps: [:mix]]
     ]
   end
 
@@ -23,7 +24,7 @@ defmodule Commitlint.MixProject do
     [
       {:pre_commit, "~> 0.3.4", only: :dev},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:commit_msg, github: "Odovren/elixir-commit-message", tag: "0.1.0", only: :dev}
+      {:dialyxir, "~> 1.1", only: [:dev], runtime: false}
     ]
   end
 end
