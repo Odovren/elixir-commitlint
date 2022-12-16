@@ -100,4 +100,23 @@ defmodule Commitlint do
       {:error, message} -> raise Commitlint.LintException, message: message
     end
   end
+
+  defmodule Setup do
+    @moduledoc """
+    Not meant to be used directly.
+    This will make sure that the files in /priv are correctly installed when compiling the project.
+    It lives in its own submodule so that it does not pollute runtime code.
+
+    This was inspired by the way [elixir-pre-commit](https://github.com/dwyl/elixir-pre-commit/) works.
+    """
+    copy = Mix.Project.deps_path() |> Path.join("commitlint/priv/commit-msg")
+    to = Mix.Project.deps_path() |> Path.join("../.git/hooks/commit-msg")
+
+    if not File.exists?(Path.dirname(to)) do
+      File.mkdir_p!(Path.dirname(to))
+    end
+
+    copy |> File.copy(to)
+    to |> File.chmod(0o755)
+  end
 end

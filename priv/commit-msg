@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cat "$1" | mix commit_lint
