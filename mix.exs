@@ -8,7 +8,11 @@ defmodule Commitlint.MixProject do
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      dialyzer: [plt_add_apps: [:mix]]
+      dialyzer: [plt_add_apps: [:mix]],
+      name: "commitlint",
+      description: "A commit message linter for Elixir",
+      source_url: "https://github.com/Odovren/elixir-commitlint",
+      package: package()
     ]
   end
 
@@ -40,6 +44,17 @@ defmodule Commitlint.MixProject do
       {:pre_commit, "~> 0.3.4", only: :dev},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1", only: [:dev], runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      files: ~w(lib priv mix.exs README.md LICENSE .formatter.exs),
+      maintainers: ["Odovren"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/Odovren/elixir-commitlint"
+      }
     ]
   end
 end
