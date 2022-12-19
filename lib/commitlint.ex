@@ -7,27 +7,24 @@ defmodule Commitlint do
   @type_regex ~r/^(?<type>[a-z]+)(?:\((?<scope>[a-z]+)\))?!?: (?<description>.+)$/
   @footer_regex ~r/^(?<label>.+?): (?<value>.+)$/
 
-  @doc """
-  Get the sections of a commit message.
-  """
   @spec get_sections(String.t()) :: [String.t()]
   defp get_sections(input) do
+    # Get the sections of a commit message.
     String.split(input, "\n\n")
   end
 
-  @doc """
-  Make sure the commit message type is allowed.
-  Expected format: "type: message" or "type(scope): message"
-
-  ## Examples
-
-      iex> Commitlint.lint_header("feat: add linting to commit messages")
-      :ok
-
-      iex> Commitlint.lint_header("inexistent: add a test commit")
-      {:error, "Invalid commit type: inexistent"}
-  """
   defp lint_header([header | rest]) do
+    # Make sure the commit message type is allowed.
+    # Expected format: "type: message" or "type(scope): message"
+
+    # ## Examples
+
+    # iex> Commitlint.lint_header("feat: add linting to commit messages")
+    # :ok
+
+    # iex> Commitlint.lint_header("inexistent: add a test commit")
+    # {:error, "Invalid commit type: inexistent"}
+
     allowed_types = Application.get_env(:commitlint, :allowed_types)
     captured = Regex.named_captures(@type_regex, header)
 
@@ -43,13 +40,11 @@ defmodule Commitlint do
     end
   end
 
-  @doc """
-  Make sure the commit message body is valid.
-  """
   @spec lint_body([String.t()]) :: lint_result
   defp lint_body([]), do: :ok
 
   defp lint_body([section | rest]) do
+    # Make sure the commit message body is valid.
     if Enum.empty?(rest) and Regex.match?(@footer_regex, section) do
       lint_footer(section)
     else
@@ -57,21 +52,17 @@ defmodule Commitlint do
     end
   end
 
-  @doc """
-  Make sure the footer lines are valid.
-  """
   @spec lint_footer(String.t()) :: lint_result
   defp lint_footer(footer) do
+    # Make sure the footer lines are valid.
     String.split(footer, "\n", trim: true) |> lint_footer_line
   end
 
-  @doc """
-  Make sure the footer lines are valid.
-  """
   @spec lint_footer_line([String.t()]) :: lint_result
   defp lint_footer_line([]), do: :ok
 
   defp lint_footer_line([line | rest]) do
+    # Make sure the footer lines are valid.
     if Regex.match?(@footer_regex, line) do
       lint_footer_line(rest)
     else
@@ -79,11 +70,9 @@ defmodule Commitlint do
     end
   end
 
-  @doc """
-  Removes all lines starting with a hash (#).
-  """
   @spec filter_out_comments(String.t()) :: String.t()
   defp filter_out_comments(input) do
+    # Removes all lines starting with a hash (#).
     String.split(input, "\n")
     |> Enum.reject(&String.starts_with?(&1, "#"))
     |> Enum.join("\n")
