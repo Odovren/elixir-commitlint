@@ -1,0 +1,25 @@
+name: Publish Hex package
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "*" ]
+
+env:
+  ELIXIR_VERSION: "1.14.0"
+  OTP_VERSION: "24.1"
+
+jobs:
+  publish:
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+          otp-version: ${{ env.OTP_VERSION }}
+      - name: Publish to Hex
+        uses: synchronal/hex-publish-action@v3.0.1
+        with:
+          hex_api_key: ${{ secrets.HEX_API_KEY }}
+          name: commitlint
