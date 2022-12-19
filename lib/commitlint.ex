@@ -80,6 +80,16 @@ defmodule Commitlint do
   end
 
   @doc """
+  Removes all lines starting with a hash (#).
+  """
+  @spec filter_out_comments(String.t()) :: String.t()
+  defp filter_out_comments(input) do
+    String.split(input, "\n")
+    |> Enum.reject(&String.starts_with?(&1, "#"))
+    |> Enum.join("\n")
+  end
+
+  @doc """
   Lint the commit message.
 
   ## Examples
@@ -93,7 +103,7 @@ defmodule Commitlint do
   """
   @spec lint!(String.t()) :: :ok
   def lint!(input) do
-    result = get_sections(input) |> lint_header
+    result = filter_out_comments(input) |> get_sections |> lint_header
 
     case result do
       :ok -> :ok

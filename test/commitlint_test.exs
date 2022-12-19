@@ -73,4 +73,15 @@ defmodule CommitlintTest do
       Commitlint.lint!("feat: ")
     end
   end
+
+  test "ignores comments in commit message" do
+    assert Commitlint.lint!("""
+           feat: add linting to commit messages
+           # invalid if kept
+
+           # body
+
+           Acked-by: John Doe
+           """) == :ok
+  end
 end
