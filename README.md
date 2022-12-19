@@ -54,3 +54,35 @@ echo "unknown: add commit linting" | mix commit_lint  # Should have exit error 1
 
 Upon compilation, the package will install a commit-msg hook in the `.git/hooks` directory. This will take care of
 running the commit linting on every commit.
+
+## Contributing
+
+If you want to contribute, you are welcome to posting issues and PRs, 
+just make sure to follow the [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) standard.
+
+### Local development
+
+First fork the repository, clone your fork, install the dependencies and compile everything:
+
+```bash
+git clone <your fork>
+cd elixir-commitlint
+mix deps.get
+mix compile
+```
+
+To ensure that your commits are following the conventional commits, you can use, well, commitlint :)
+
+```bash
+cp priv/commit-msg .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
+```
+
+Use the following to run the test cases:
+
+```bash
+mix test
+```
+
+## License
+
+See [LICENSE](LICENSE) for details.
