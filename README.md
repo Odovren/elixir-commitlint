@@ -13,7 +13,7 @@ by adding `commitlint` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:commitlint, "~> 0.1.2"}
+    {:commitlint, "~> 0.1.3", runtime: false, only: :dev}
   ]
 end
 ```
