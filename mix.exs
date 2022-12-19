@@ -4,7 +4,7 @@ defmodule Commitlint.MixProject do
   def project do
     [
       app: :commitlint,
-      version: "0.1.2",
+      version: "0.1.3",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -43,7 +43,8 @@ defmodule Commitlint.MixProject do
     [
       {:pre_commit, "~> 0.3.4", only: :dev},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.1", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.1", only: [:dev], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
