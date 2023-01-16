@@ -6,6 +6,7 @@ defmodule Commitlint do
 
   @type_regex ~r/^(?<type>[a-z]+)(?:\((?<scope>[a-z]+)\))?!?: (?<description>.+)$/
   @footer_regex ~r/^(?<label>.+?): (?<value>.+)$/
+  @default_allowed_types ~w(feat fix docs style refactor perf test build ci chore revert)
 
   @spec get_sections(String.t()) :: [String.t()]
   defp get_sections(input) do
@@ -25,7 +26,7 @@ defmodule Commitlint do
     # iex> Commitlint.lint_header("inexistent: add a test commit")
     # {:error, "Invalid commit type: inexistent"}
 
-    allowed_types = Application.get_env(:commitlint, :allowed_types)
+    allowed_types = Application.get_env(:commitlint, :allowed_types, @default_allowed_types)
     captured = Regex.named_captures(@type_regex, header)
 
     cond do
