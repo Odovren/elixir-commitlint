@@ -1,7 +1,5 @@
 defmodule Commitlint do
-  @moduledoc """
-  Documentation for `Commitlint`.
-  """
+  @moduledoc "README.md" |> File.read!() |> String.trim()
   @type lint_result :: :ok | {:error, String.t()}
 
   @type_regex ~r/^(?<type>[a-z]+)(?:\((?<scope>[a-z]+)\))?!?: (?<description>.+)$/
