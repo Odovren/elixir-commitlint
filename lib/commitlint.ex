@@ -30,6 +30,10 @@ defmodule Commitlint do
     captured = Regex.named_captures(@type_regex, header)
 
     cond do
+      check_skip(header) ->
+        IO.puts("Skipping commit message: #{header}")
+        :ok
+
       captured["type"] not in allowed_types ->
         {:error, "Invalid commit type: #{captured["type"]}"}
 
@@ -39,6 +43,12 @@ defmodule Commitlint do
       true ->
         lint_body(rest)
     end
+  end
+
+  @spec check_skip(String.t()) :: boolean()
+  defp check_skip(header) do
+    # Check if the commit message should be skipped.
+    String.starts_with?(header, "Merge ")
   end
 
   @spec lint_body([String.t()]) :: lint_result

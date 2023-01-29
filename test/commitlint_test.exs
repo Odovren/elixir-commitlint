@@ -84,4 +84,8 @@ defmodule CommitlintTest do
            Acked-by: John Doe
            """) == :ok
   end
+
+  test "skip merge commits" do
+    assert Commitlint.lint!("Merge branch 'master' into feature") == :ok
+  end
 end
